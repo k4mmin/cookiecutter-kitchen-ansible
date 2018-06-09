@@ -1,0 +1,4 @@
+---
+info:
+  author: {{cookiecutter.full_name}}
+  description: {{cookiecutter.short_description}}
