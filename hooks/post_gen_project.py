@@ -20,22 +20,26 @@ for f in files:
 os.rmdir('{{cookiecutter.role_name}}')
 shutil.rmtree(os.getcwd()+'/.git')
 
-#create a repo using name/pass or token
-#g = Github(os.environ['gituser'], os.environ['gitpass'])
-g = Github(os.environ['gittoken'])
-u = g.get_user()
-u.create_repo('{{cookiecutter.repo_name}}')
+#create new repo if credentials are defined
+try:
+    os.environ['gittoken']
+except NameError:
+    pass
+else:
+    print("Variable is defined.")
+    #create a repo using name/pass or token
+    #g = Github(os.environ['gituser'], os.environ['gitpass'])
+    g = Github(os.environ['gittoken'])
+    u = g.get_user()
+    u.create_repo('{{cookiecutter.repo_name}}')
 
-# create working directory repo
-git.Repo.init(os.getcwd())
+    # create working directory repo
+    git.Repo.init(os.getcwd())
 
-# get working diretory repo
-repo = git.Repo(os.getcwd())
-# add files, remote, commit and push
-repo.git.add('.')
-repo.index.commit("wei commit")
-remote = repo.create_remote('origin', url='https://'+os.environ['gituser']+':'+os.environ['gitpass']+'@github.com/'+'{{cookiecutter.github_user}}'+'/'+'{{cookiecutter.repo_name}}'+'.git')
-remote.push(refspec='{}:{}'.format('master', 'origin'))
-
-#T O D O
-# no guardar en el fichero las variables de entorno
+    # get working diretory repo
+    repo = git.Repo(os.getcwd())
+    # add files, remote, commit and push
+    repo.git.add('.')
+    repo.index.commit("wei commit")
+    remote = repo.create_remote('origin', url='https://'+os.environ['gituser']+':'+os.environ['gitpass']+'@github.com/'+'{{cookiecutter.github_user}}'+'/'+'{{cookiecutter.repo_name}}'+'.git')
+    remote.push(refspec='{}:{}'.format('master', 'origin'))
