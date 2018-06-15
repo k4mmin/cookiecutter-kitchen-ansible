@@ -23,7 +23,7 @@ shutil.rmtree(os.getcwd()+'/.git')
 #create new repo if credentials are defined
 try:
     os.environ['gittoken']
-except NameError:
+except (NameError,KeyError), e:
     pass
 else:
     print("Variable is defined.")
