@@ -4,6 +4,7 @@ import git
 import os
 import shutil
 from github import Github
+import functions
 
 #clone repository
 Repo.clone_from('{{cookiecutter.ansible_url}}', '{{cookiecutter.role_name}}', branch='master')
@@ -43,3 +44,5 @@ else:
     repo.index.commit("wei commit")
     remote = repo.create_remote('origin', url='https://'+os.environ['gituser']+':'+os.environ['gitpass']+'@github.com/'+'{{cookiecutter.github_user}}'+'/'+'{{cookiecutter.repo_name}}'+'.git')
     remote.push(refspec='{}:{}'.format('master', 'origin'))
+
+functions.create_jenkins_config()
