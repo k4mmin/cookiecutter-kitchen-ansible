@@ -4,7 +4,7 @@ import git
 import os
 import shutil
 from github import Github
-import functions
+import postgenfunctions
 
 #clone repository
 Repo.clone_from('{{cookiecutter.ansible_url}}', '{{cookiecutter.role_name}}', branch='master')
