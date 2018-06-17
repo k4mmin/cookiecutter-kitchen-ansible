@@ -7,17 +7,30 @@ from github import Github
 import os
 from jinja2 import Environment, FileSystemLoader
 #https://gist.github.com/wrunk/1317933/d204be62e6001ea21e99ca0a90594200ade2511e
+import errno
+
+def copydir(src, dest):
+    try:
+        shutil.copytree(src, dest)
+    except OSError as e:
+        # If the error was caused because the source wasn't a directory
+        if e.errno == errno.ENOTDIR:
+            shutil.copy(src, dest)
+        else:
+            print('Directory not copied. Error: %s' % e)
 
 def create_jenkins_config():
-    # Capture working directory
+    # Capture working directory and generates a new working directory
     # os.path.dirname(os.getcwd())+"/jenkins/jobs/kitchen" dont work with cookiecutter
     WORKDIR = os.getcwd()
-    TEMPLATEDIR = WORKDIR.rsplit('/', 2)[0]+"/jenkins/jobs/'{{cookiecutter.role_name}}'"
-    # Create the jinja2 environment.
+    TEMPLATEDIR = WORKDIR.rsplit('/', 2)[0]+"/jenkins/jobs/kitchen"
+    NEWDIR = TEMPLATEDIR.rsplit('/', 1)[0]+"/'{{cookiecutter.role_name}}'"
+    copydir(TEMPLATEDIR,NEWDIR)
+    # Create the jinja2 environment and parse configuration file
     # Notice the use of trim_blocks, which greatly helps control whitespace.
-    j2_env = Environment(loader=FileSystemLoader(TEMPLATEDIR),trim_blocks=True)
+    j2_env = Environment(loader=FileSystemLoader(NEWDIR),trim_blocks=True)
     newfile = j2_env.get_template('config.xml.tpl').render(project_name='{{cookiecutter.role_name}}')
-    with open(TEMPLATEDIR+"/config.xml", "wb") as fh:
+    with open(NEWDIR+"/config.xml", "wb") as fh:
         fh.write(newfile)
 
 #clone repository
