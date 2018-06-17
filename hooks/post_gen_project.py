@@ -14,7 +14,7 @@ def create_jenkins_config():
     #WORKDIR = os.path.dirname(os.getcwd())+"/jenkins/jobs/kitchen"
     WORKDIR = os.getcwd()
     print WORKDIR
-    TEMPLATEDIR = WORKDIR.rsplit('/', 1)[0]+"/jenkins/jobs/kitchen"
+    TEMPLATEDIR = WORKDIR.rsplit('/', 2)[0]+"/jenkins/jobs/kitchen"
     print TEMPLATEDIR
     # Create the jinja2 environment.
     # Notice the use of trim_blocks, which greatly helps control whitespace.
