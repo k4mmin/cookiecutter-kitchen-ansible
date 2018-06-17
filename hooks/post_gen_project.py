@@ -12,13 +12,15 @@ def create_jenkins_config():
     # Capture working directory
     #WORKDIR = os.path.dirname(os.path.abspath(__file__))
     #WORKDIR = os.path.dirname(os.getcwd())+"/jenkins/jobs/kitchen"
-    WORKDIR = os.getcwd().rsplit('/', 1)[0]+"/jenkins/jobs/kitchen"
+    WORKDIR = os.getcwd()
     print WORKDIR
+    TEMPLATEDIR = WORKDIR.rsplit('/', 1)[0]+"/jenkins/jobs/kitchen"
+    print TEMPLATEDIR
     # Create the jinja2 environment.
     # Notice the use of trim_blocks, which greatly helps control whitespace.
-    j2_env = Environment(loader=FileSystemLoader(WORKDIR),trim_blocks=True)
+    j2_env = Environment(loader=FileSystemLoader(TEMPLATEDIR),trim_blocks=True)
     newfile = j2_env.get_template('config.xml.tpl').render(project_name='{{cookiecutter.role_name}}')
-    with open(WORKDIR+"/config.xml", "wb") as fh:
+    with open(TEMPLATEDIR+"/config.xml", "wb") as fh:
         fh.write(newfile)
 
 #clone repository
