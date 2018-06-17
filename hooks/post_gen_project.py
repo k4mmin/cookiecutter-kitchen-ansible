@@ -10,12 +10,9 @@ from jinja2 import Environment, FileSystemLoader
 
 def create_jenkins_config():
     # Capture working directory
-    #WORKDIR = os.path.dirname(os.path.abspath(__file__))
-    #WORKDIR = os.path.dirname(os.getcwd())+"/jenkins/jobs/kitchen"
+    # os.path.dirname(os.getcwd())+"/jenkins/jobs/kitchen" dont work with cookiecutter
     WORKDIR = os.getcwd()
-    print WORKDIR
     TEMPLATEDIR = WORKDIR.rsplit('/', 2)[0]+"/jenkins/jobs/kitchen"
-    print TEMPLATEDIR
     # Create the jinja2 environment.
     # Notice the use of trim_blocks, which greatly helps control whitespace.
     j2_env = Environment(loader=FileSystemLoader(TEMPLATEDIR),trim_blocks=True)
