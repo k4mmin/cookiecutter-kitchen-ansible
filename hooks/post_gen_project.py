@@ -11,7 +11,7 @@ from jinja2 import Environment, FileSystemLoader
 def create_jenkins_config():
     # Capture working directory
     #WORKDIR = os.path.dirname(os.path.abspath(__file__))
-    WORKDIR = os.getcwd()+"/volumes/jenkins/jobs/kitchen"
+    WORKDIR = os.path.dirname(os.getcwd())+"/jenkins/jobs/kitchen"
     print WORKDIR
     # Create the jinja2 environment.
     # Notice the use of trim_blocks, which greatly helps control whitespace.
