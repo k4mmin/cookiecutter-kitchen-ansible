@@ -24,7 +24,7 @@ def create_jenkins_config():
     # os.path.dirname(os.getcwd())+"/jenkins/jobs/kitchen" dont work with cookiecutter
     WORKDIR = os.getcwd()
     TEMPLATEDIR = WORKDIR.rsplit('/', 2)[0]+"/jenkins/jobs/kitchen"
-    NEWDIR = TEMPLATEDIR.rsplit('/', 1)[0]+"/'{{cookiecutter.role_name}}'"
+    NEWDIR = TEMPLATEDIR.rsplit('/', 1)[0]+"/{{cookiecutter.role_name}}"
     copydir(TEMPLATEDIR,NEWDIR)
     # Create the jinja2 environment and parse configuration file
     # Notice the use of trim_blocks, which greatly helps control whitespace.
