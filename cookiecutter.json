@@ -2,11 +2,11 @@
   "full_name": "SergioTM",
   "email": "sergiotm87@gmail.com",
   "role_name": "kitchen",
-  "ansible_url": "https://github.com/Sergiotm87/kitchen-ansible-WordpressNginx",
+  "ansible_url": "https://github.com/k4mmin/ansible-wordpress",
   "github_user": "Sergiotm87",
-  "repo_name": "ansible-kitchen",
+  "repo_name": "kitchen-ansible",
   "short_description": "This Ansible Role infuses antigravity, you are warned",
-  "release_date": "2017-03-15",
+  "release_date": "2017-05-15",
   "year": "2018",
-  "version": "0.0.1"
+  "version": "0.1"
 }
